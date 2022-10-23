@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当前做种统计</title>
+</head>
+<body>
+    <div id="ss-container">
+        <div id="ss-high-friction-bar">
+            <div class="ss-graph"></div>
+            <div class="ss-graph"></div>
+            <div class="ss-graph"></div>
+            <div class="ss-graph"></div>
+        </div>
+        <div id="ss-notice">
+            <span id="ss-notice-text"></span>
+        </div>
+        <div id="ss-result"></div>
+    </div>
+
+    <script>
+        let ssContainer = document.getElementById("ss-container");
+        let ssBar = document.getElementById("ss-high-friction-bar");
+        // 鼠标在 ssBar 上按下时，使 ssContainer 跟随鼠标移动
+        ssBar.onmousedown = function (e) {
+            let x = e.clientX - ssContainer.offsetLeft;
+            let y = e.clientY - ssContainer.offsetTop;
+            // 增大 ssContainer 的阴影效果
+            ssContainer.style.boxShadow = "0 0 10px 5px rgba(0, 0, 0, 0.1)";
+            document.onmousemove = function (e) {
+                ssContainer.style.left = e.clientX - x - 12 + "px";
+                ssContainer.style.top = e.clientY - y - 12 + "px";
+                // 防止鼠标移出浏览器窗口
+                if (e.clientX - x - 12 < 0) {
+                    ssContainer.style.left = 0;
+                }
+                if (e.clientY - y - 12 < 0) {
+                    ssContainer.style.top = 0;
+                }
+                if (e.clientX - x - 12 > document.documentElement.clientWidth - ssContainer.offsetWidth) {
+                    ssContainer.style.left = document.documentElement.clientWidth - ssContainer.offsetWidth + "px";
+                }
+                if (e.clientY - y - 12 > document.documentElement.clientHeight - ssContainer.offsetHeight) {
+                    ssContainer.style.top = document.documentElement.clientHeight - ssContainer.offsetHeight + "px";
+                }
+            }
+        }
+        // 鼠标松开时，停止移动
+        document.onmouseup = function () {
+            // 恢复 ssContainer 的阴影效果
+            ssContainer.style.boxShadow = "0 0 5px 2px rgba(0, 0, 0, 0.1)";
+            document.onmousemove = null;
+        }
+        
+    </script>
+</body>
+<style>
+    #ss-high-friction-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 6px;
+        cursor: move;
+    }
+    .ss-graph {
+        height: 1px;
+        width: 60px;
+        background-color: rgba(0, 0, 0, 0.1);
+        margin-bottom: 2px;
+    }
+    #ss-container {
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: rgba(0, 0, 0, 0.76);
+        box-sizing: border-box;
+        min-width: 20vw;
+        max-width: 60vw;
+        width: auto;
+        height: auto;
+        min-height: 15vh;
+        max-height: 80vh;
+        background-color: rgba(255, 255, 255, 0.96);
+        position: fixed;
+        left: 0;
+        top: 0;
+        border-radius: 6px;
+        margin: 12px;
+        padding: 12px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.1s ease-in-out;
+        overflow: auto;
+        z-index: 9999;
+    }
+    #ss-container:hover {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+        background-color: white;
+    }
+    #ss-notice {
+        background-color: rgba(0, 0, 0, 0.05);
+        width: fit-content;
+        padding: 0.2rem;
+        border-radius: 3px;
+    }
+    #ss-result {
+        margin-top: 0.4rem;
+    }
+    #ss-result table {
+        border-collapse: collapse;
+        margin-top: 0.4rem;
+    }
+    #ss-result table, #ss-result th, #ss-result td {
+        border: 0;
+        /* background-color: rgba(4,150,255,1); */
+    }
+    #ss-result th {
+        background-color: rgba(4, 142, 255, 0.96);
+        color: rgba(255, 255, 255, 0.96);
+    }
+    #ss-result th, #ss-result td {
+        text-align: left;
+        padding: 0.2rem 1rem;
+    }
+    #ss-result tr:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    #ss-result tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    #ss-result td {
+        font-size: inherit;
+    }
+</style>
+</html>
