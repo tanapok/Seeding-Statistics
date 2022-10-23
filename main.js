@@ -15,7 +15,7 @@ var siteData = [
 		siteName: 'WinterSakura',
 		siteUrl: 'wintersakura.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
-		siteGroups: ['-SakuraWEB', '-SakuraSUB', 'WS', 'WScode', 'Sakura Academic'],
+		siteGroups: ['-SakuraWEB', '-SakuraSUB', '-WS', '-WScode', '-Sakura Academic'],
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
