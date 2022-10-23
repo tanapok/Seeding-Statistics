@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.0
+// @version      1.0.1
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
@@ -294,9 +294,101 @@ function outputData() {
 
 // 向页面注入 UI
 function injectUI() {
-	let ssUI = document.createElement('div');
-	ssUI.innerHTML = '<div id="ss-container"><div id="ss-high-friction-bar"><div class="ss-graph"></div><div class="ss-graph"></div><div class="ss-graph"></div><div class="ss-graph"></div></div><div id="ss-notice"><span id="ss-notice-text"></span></div><div id="ss-result"></div></div><style>#ss-high-friction-bar{display:flex;flex-direction:column;justify-content:start;align-items:center;margin-bottom:6px;cursor:move}.ss-graph{height:1px;width:60px;background-color:rgba(0,0,0,0.1);margin-bottom:2px}#ss-container{font-family:"Helvetica Neue",Helvetica,Arial;font-size:0.8rem;line-height:1.45;color:rgba(0,0,0,0.76);box-sizing:border-box;min-width:20vw;max-width:60vw;width:auto;height:auto;min-height:15vh;max-height:80vh;background-color:rgba(255,255,255,0.96);position:fixed;left:0;top:0;border-radius:6px;margin:12px;padding:12px;box-shadow:0px 2px 6px rgba(0,0,0,0.1);transition:box-shadow 0.1s ease-in-out;overflow:auto;z-index:9999}#ss-container:hover{box-shadow:0px 2px 8px rgba(0,0,0,0.25);background-color:white}#ss-notice{background-color:rgba(0,0,0,0.05);width:fit-content;padding:0.2rem;border-radius:3px}#ss-result{margin-top:0.4rem}#ss-result table{border-collapse:collapse;margin-top:0.4rem}#ss-result table,#ss-result th,#ss-result td{border:0}#ss-result th{background-color:rgba(4,142,255,0.96);color:rgba(255,255,255,0.96)}#ss-result th,#ss-result td{text-align:left;padding:0.2rem 1rem}#ss-result td{font-size:inherit}#ss-result tr:nth-child(odd){background-color:rgba(0,0,0,0.05)}#ss-result tr:nth-child(even){background-color:rgba(0,0,0,0.1)}</style>';
-	document.body.appendChild(ssUI);
+    let ssHTML = document.createElement('div');
+    ssHTML.id = 'ss-container';
+    ssHTML.innerHTML = `
+    <div id="ss-high-friction-bar">
+        <div class="ss-graph"></div>
+        <div class="ss-graph"></div>
+        <div class="ss-graph"></div>
+        <div class="ss-graph"></div>
+    </div>
+    <div id="ss-notice">
+        <span id="ss-notice-text"></span>
+    </div>
+    <div id="ss-result"></div>
+    `;
+    let ssCSS = document.createElement('style');
+    ssCSS.innerHTML = `
+    #ss-high-friction-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        margin-bottom: 6px;
+        cursor: move;
+    }
+    .ss-graph {
+        height: 1px;
+        width: 60px;
+        background-color: rgba(0, 0, 0, 0.1);
+        margin-bottom: 2px;
+    }
+    #ss-container {
+        font-family: "Helvetica Neue", Helvetica, Arial;
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: rgba(0, 0, 0, 0.76);
+        box-sizing: border-box;
+        min-width: 20vw;
+        max-width: 60vw;
+        width: auto;
+        height: auto;
+        min-height: 15vh;
+        max-height: 80vh;
+        background-color: rgba(255, 255, 255, 0.96);
+        position: fixed;
+        left: 0;
+        top: 0;
+        border-radius: 6px;
+        margin: 12px;
+        padding: 12px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.1s ease-in-out;
+        overflow: auto;
+        z-index: 9999;
+    }
+    #ss-container:hover {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+        background-color: white;
+    }
+    #ss-notice {
+        background-color: rgba(0, 0, 0, 0.05);
+        width: fit-content;
+        padding: 0.2rem;
+        border-radius: 3px;
+    }
+    #ss-result {
+        margin-top: 0.4rem;
+    }
+    #ss-result table {
+        border-collapse: collapse;
+        margin-top: 0.4rem;
+    }
+    #ss-result table, #ss-result th, #ss-result td {
+        border: 0;
+        /* background-color: rgba(4,150,255,1); */
+    }
+    #ss-result th {
+        background-color: rgba(4, 142, 255, 0.96);
+        color: rgba(255, 255, 255, 0.96);
+    }
+    #ss-result th, #ss-result td {
+        text-align: left;
+        padding: 0.2rem 1rem;
+    }
+    #ss-result tr:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+    #ss-result tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    #ss-result td {
+        font-size: inherit;
+    }
+    `;
+    document.body.appendChild(ssCSS);
+    document.body.appendChild(ssHTML);
 	notice = document.querySelector('#ss-notice');
 	result = document.querySelector('#ss-result');
 }
