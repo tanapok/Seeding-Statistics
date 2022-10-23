@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         保种统计
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/tanapok/Seeding-Statistics
 // @version      1.0.0
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
 // @icon         https://download.wintersakura.net/uploads/2022/10/23/63551a96a6ddd.png
 // @grant        none
+// @license      GNU GPLv3
 // ==/UserScript==
 
 var siteData = [
