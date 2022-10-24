@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.3
+// @version      1.0.4
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
@@ -243,8 +243,8 @@ function spider() {
         // 遍历 siteData 中的所有站点，查找 siteGroup 中的元素包含于 title 中的首个元素
         let finded = false;
         for (let i = 0; i < siteData.length; i++) {
-            for (let j = 0; j < siteData[siteIndex].siteGroups.length; j++) {
-                if (title.indexOf(siteData[siteIndex].siteGroups[j]) !== -1) {
+            for (let j = 0; j < siteData[i].siteGroups.length; j++) {
+                if (title.indexOf(siteData[i].siteGroups[j]) !== -1) {
                     siteData[i].seedSize += sizeToBytes(size);
                     siteData[i].seedersNumber += seeders;
                     siteData[i].seedUploadSize += sizeToBytes(uploadSize);
