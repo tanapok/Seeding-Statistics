@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.1
+// @version      1.0.2
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
@@ -17,7 +17,7 @@ var siteData = [
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-SakuraWEB', '-SakuraSUB', '-WS', '-WScode', '-Sakura Academic'],
 		seedListSelector: '#ka1', // 做种列表区域选择器
-		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child', // 做种列表条目选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
 		seedSizeSelector: 'td:nth-child(4)',
 		seedersNumberSelector: 'td:nth-child(5)',
@@ -41,7 +41,7 @@ var siteData = [
 		spiderModel: 'NexusPHP',
 		siteGroups: ['-Others'],
 		seedListSelector: '#ka1', // 做种列表区域选择器
-		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child', // 做种列表条目选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
 		seedSizeSelector: 'td:nth-child(4)',
 		seedersNumberSelector: 'td:nth-child(5)',
