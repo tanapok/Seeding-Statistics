@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.2
+// @version      1.0.3
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
+// @match        https://carpt.net/userdetails.php?id=*
 // @icon         https://download.wintersakura.net/uploads/2022/10/23/63551a96a6ddd.png
 // @grant        none
 // @license      GNU GPLv3
@@ -16,6 +17,30 @@ var siteData = [
 		siteUrl: 'wintersakura.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-SakuraWEB', '-SakuraSUB', '-WS', '-WScode', '-Sakura Academic'],
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+	{
+		siteName: 'CarPT',
+		siteUrl: 'carpt.net',
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-CarPT'],
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
