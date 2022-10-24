@@ -480,7 +480,7 @@ function bindUIActions() {
             }
         } else {
             if (uiReady) {
-                showNotice('当前页面数据已统计过，请手动切换至下一页');
+                showNotice('当前页面数据已统计过，有可能是没有数据，或需手动切换至下一页');
             }
         }
     }, 1000);
