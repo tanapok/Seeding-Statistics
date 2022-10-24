@@ -9,6 +9,7 @@
 ### 支持的站点
 
 - WinterSakura
+- CarPT
 
 ### 安装方法（推荐）
 
