@@ -2,7 +2,7 @@
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
 // @version      1.1.0
-// @description  Try this little tool and figure out the seed data!
+// @description  保种统计是一个用于统计用户做种情况的脚本，可用于 NexusPHP 架构的 PT 站点。脚本可以统计用户的做种数据，并根据站点进行分类汇总，详细展示用户做种详情。可以统计的数据包括站点名称、做种数量、做种体积、平均保种人数、做种上传总量、做种下载总量、平均做种时间等。
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
 // @match        https://carpt.net/userdetails.php?id=*
