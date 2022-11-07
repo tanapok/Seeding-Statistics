@@ -60,6 +60,54 @@ var siteData = [
 		seedDownloadSize: 0,
 		seedTime: 0,
 	},
+    {
+		siteName: 'HDVideo',
+		siteUrl: 'hdvideo.one',
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDVWEB', '-HDVMV', '@HDVWEB', '@HDVMV'],
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'UltraHD',
+		siteUrl: 'ultrahd.net',
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-UltraTV', '-UltraHD', '@UltraTV', '@UltraHD'],
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
 	{
 		siteName: 'Others', // 未找到对应站点时的默认值
 		siteUrl: '',
