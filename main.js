@@ -823,10 +823,10 @@ function printSiteData() {
     for (var i = 0; i < siteData.length; i++) {
         // 如果 siteURL 为空或为 google.com，则为未正式适配
         if (siteData[i].siteUrl == '' || siteData[i].siteUrl == 'google.com') {
-            siteDataString += siteData[i].siteName + '（未正式适配）：' + siteData[i].siteGroups + '\n';
+            siteDataString += '- ' + siteData[i].siteName + '（未正式适配）：' + siteData[i].siteGroups + '\n';
         // 正式适配的站点
         } else {
-            siteDataString += siteData[i].siteName + '：' + siteData[i].siteGroups + '\n';
+            siteDataString += '- ' + siteData[i].siteName + '：' + siteData[i].siteGroups + '\n';
         }
     }
     siteDataString = siteDataString.replace(/,/g, ', ');
