@@ -1,5 +1,6 @@
 <h1 align="center">
-<img width="154px" src="https://raw.githubusercontent.com/tanapok/Seeding-Statistics/main/ss-new-icon.svg"><span style="font-size: 1.4rem">Seeding Statistics</span>
+<img width="154px" src="https://raw.githubusercontent.com/tanapok/Seeding-Statistics/main/ss-new-icon.svg"><span style="font-size: 1.4rem">Seeding Statistics</span><br>
+<img src="https://img.shields.io/github/license/tanapok/Seeding-Statistics"> <img src="https://img.shields.io/github/v/release/tanapok/Seeding-Statistics"> <img src="https://img.shields.io/github/last-commit/tanapok/Seeding-Statistics/release">
 </h1>
 
 保种统计是一个用于统计用户做种情况的脚本，可用于 NexusPHP 架构的 PT 站点。
