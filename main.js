@@ -1084,6 +1084,92 @@ function outputData() {
     notice.style.color = 'white';
     // #ss-container 的最小宽度设置为其当前值，防止变形
     ssContainer.style.minWidth = ssContainer.offsetWidth + 'px';
+	// 表格排序功能
+    // 鼠标悬停显示手型
+    let tableHead = document.querySelectorAll('#ss-container table tr th');
+    for (let i = 0; i < tableHead.length; i++) {
+        tableHead[i].addEventListener('mouseover', function() {
+            this.style.cursor = 'pointer';
+        });
+    }
+    // 获取表格元素
+    let tableElement = document.querySelector('#ss-container table');
+    // 当 #ss-container 中的表格表头项被点击时，使用 sortTable 函数进行排序
+    for(let i = 0; i < tableHead.length; i++) {
+        tableHead[i].addEventListener('click', function() {
+            sortTable(tableElement, i);
+        });
+    }
+}
+
+// sortTable 函数，根据对应列 col 对 table 进行排序
+function sortTable(table, col) {
+    // 清除所有其他列后的 ' ▲' ' ▼'
+    let tableHead = document.querySelectorAll('#ss-container table tr th');
+    for (let i = 0; i < tableHead.length; i++) {
+        if (i !== col) {
+            tableHead[i].innerHTML = tableHead[i].innerHTML.replace(' ▲', '').replace(' ▼', '');
+        }
+    }
+	// 如果列后面有 ' ▲'，则将其改为 ' ▼'，并将 table 进行降序排序
+	if (tableHead[col].innerHTML.indexOf(' ▲') !== -1) {
+		tableHead[col].innerHTML = tableHead[col].innerHTML.replace(' ▲', ' ▼');
+		sortTableDesc(table, col);
+	}
+	// 如果列后面有 ' ▼'，则将其改为 ' ▲'，并将 table 进行升序排序
+	else if (tableHead[col].innerHTML.indexOf(' ▼') !== -1) {
+		tableHead[col].innerHTML = tableHead[col].innerHTML.replace(' ▼', ' ▲');
+		sortTableAsc(table, col);
+	}
+	// 如果列后面没有 ' ▲' ' ▼'，则将其改为 ' ▲'，并将 table 进行升序排序
+	else {
+		tableHead[col].innerHTML = tableHead[col].innerHTML + ' ▲';
+		sortTableAsc(table, col);
+	}
+}
+
+// sortTableAsc 函数，根据对应列 col 对 table 进行升序排序
+function sortTableAsc(table, col) {
+	let rows = table.rows;
+	let arr = [];
+	for (let i = 1; i < rows.length; i++) {
+		arr.push(rows[i]);
+	}
+	arr.sort(function(a, b) {
+		let aVal = a.cells[col].getAttribute('data-value');
+		let bVal = b.cells[col].getAttribute('data-value');
+		if (isNaN(aVal) || isNaN(bVal)) {
+			return aVal.localeCompare(bVal);
+		}
+		else {
+			return aVal - bVal;
+		}
+	});
+	for (let i = 0; i < arr.length; i++) {
+		table.appendChild(arr[i]);
+	}
+}
+
+// sortTableDesc 函数，根据对应列 col 对 table 进行降序排序
+function sortTableDesc(table, col) {
+	let rows = table.rows;
+	let arr = [];
+	for (let i = 1; i < rows.length; i++) {
+		arr.push(rows[i]);
+	}
+	arr.sort(function(a, b) {
+		let aVal = a.cells[col].getAttribute('data-value');
+		let bVal = b.cells[col].getAttribute('data-value');
+		if (isNaN(aVal) || isNaN(bVal)) {
+			return bVal.localeCompare(aVal);
+		}
+		else {
+			return bVal - aVal;
+		}
+	});
+	for (let i = 0; i < arr.length; i++) {
+		table.appendChild(arr[i]);
+	}
 }
 
 /* UI 相关 */
