@@ -1,5 +1,5 @@
 <h1 align="center">
-<span style="font-size: 1.4rem">Seeding Statistics</span>
+<img width="154px" src="https://raw.githubusercontent.com/tanapok/Seeding-Statistics/main/ss-new-icon.svg"><span style="font-size: 1.4rem">Seeding Statistics</span>
 </h1>
 
 保种统计是一个用于统计用户做种情况的脚本，可用于 NexusPHP 架构的 PT 站点。
@@ -8,15 +8,13 @@
 
 ### 用户界面截图
 
-![用户界面截图](https://user-images.githubusercontent.com/25226381/197413483-3ee84565-852d-477e-906b-a0c393851571.png "用户界面截图")
+![用户界面截图](https://raw.githubusercontent.com/tanapok/Seeding-Statistics/main/screenshot.png "用户界面截图")
 
 ### 使用方法
 
-先安装 [TamperMonkey](https://www.tampermonkey.net/) ，然后 [安装脚本](https://greasyfork.org/zh-CN/scripts/453598-%E4%BF%9D%E7%A7%8D%E7%BB%9F%E8%AE%A1) 并启用。启用脚本后，在脚本所支持站点的个人详情页，点击展开做种列表，脚本会自动运行并收集数据。你可以根据用户界面的提示进行操作。
+先安装 [TamperMonkey](https://www.tampermonkey.net/) ，然后 [安装脚本](https://greasyfork.org/zh-CN/scripts/453598-%E4%BF%9D%E7%A7%8D%E7%BB%9F%E8%AE%A1) 并启用。你也可以在 [Releases 页面](https://github.com/tanapok/Seeding-Statistics/releases/tag/v1.0.4) 下载并手动安装脚本的最新版本。如果你是新手用户，可以参考下面的[详细安装方法](#详细安装方法)。
 
-你也可以在 [Releases 页面](https://github.com/tanapok/Seeding-Statistics/releases/tag/v1.0.4) 下载并手动安装脚本的最新版本。
-
-如果你是新手用户，可以参考下面的[详细安装方法](#详细安装方法)。
+启用脚本后，在脚本所支持站点的个人详情页，点击展开做种列表，脚本会自动运行并收集数据。你可以根据用户界面的提示进行操作。
 
 ### 支持的站点和小组
 
@@ -58,9 +56,17 @@
 
 - [JavaScript-MD5](https://github.com/blueimp/JavaScript-MD5)
 
+### 贡献
+
+如果你有什么好的想法或需求可在 [Issues 页面](https://github.com/tanapok/Seeding-Statistics/issues) 提出。或者自己动手 DIY。代码具有比较详细的注释。
+
+感谢 FireStorm 统计了大量的站点小组信息。❤
+
 ### Bug 报告
 
 你可以在 [Issues 页面](https://github.com/tanapok/Seeding-Statistics/issues) 直接提出 issue。
+
+---
 
 ### 详细安装方法
 
