@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.4
-// @description  Try this little tool and figure out the seed data!
+// @version      1.1.0
+// @description  保种统计是一个用于统计用户做种情况的脚本，可用于 NexusPHP 架构的 PT 站点。脚本可以统计用户的做种数据，并根据站点进行分类汇总，详细展示用户做种详情。可以统计的数据包括站点名称、做种数量、做种体积、平均保种人数、做种上传总量、做种下载总量、平均做种时间等。
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
 // @match        https://carpt.net/userdetails.php?id=*
-// @icon         https://download.wintersakura.net/uploads/2022/10/23/63551a96a6ddd.png
+// @match        https://hdvideo.one/userdetails.php?id=*
+// @match        https://ultrahd.net/userdetails.php?id=*
+// @match        *://*/userdetails.php?id=*
+// @icon         https://download.wintersakura.net/uploads/2022/11/08/63693c03f0e2a.png
 // @grant        none
 // @license      GNU GPLv3
 // ==/UserScript==
@@ -17,6 +20,7 @@ var siteData = [
 		siteUrl: 'wintersakura.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-SakuraWEB', '-SakuraSUB', '-WS', '-WScode', '-Sakura Academic'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -41,6 +45,732 @@ var siteData = [
 		siteUrl: 'carpt.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-CarPT'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HDVideo',
+		siteUrl: 'hdvideo.one',
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDVWEB', '-HDVMV', '@HDVWEB', '@HDVMV'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'UltraHD',
+		siteUrl: 'ultrahd.net',
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-UltraTV', '-UltraHD', '@UltraTV', '@UltraHD'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'QHstudIo',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-QHstudIo', '@QHstudIo'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'Audiences',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-Audies', '@Audies', '-ADE', '@ADE', '@ADWeb', '-ADWeb', '-ADAudio', '-ADEBook', '-ADMusic', '@ADAudio', '@ADEBook', '@ADMusic'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'CHDBits',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-CHDBits', '-CHDTV', '-CHDPAD', '-CHDWEB', '-CHDHKTV', '-StBOX', '-OneHD', '@CHDBits', '@CHDTV', '@CHDPAD', '@CHDWEB', '@CHDHKTV', '@StBOX', '@OneHD'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HD Dolby',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-Dream', '-DBTV', '-HDo', '@Dream', '@DBTV', '@HDo'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HDFans',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDFans', '@HDFans'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HDSky',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDSky', '-HDSWEB', '-HDSTV', '-HDSPad', '-HDS', '@HDSky', '@HDSWEB', '@HDSTV', '@HDSPad', '@HDS'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'LemonHD',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-LHD', '-LeagueHD', '-LeagueNF', '-LeagueTV', '-LeagueCD', '-LeagueWEB', '-i18n', '-CiNT', '@LHD', '@LeagueHD', '@LeagueNF', '@LeagueTV', '@LeagueCD', '@LeagueWEB', '@i18n', '@CiNT'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'M-Team',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-MTeam', '-MPAD', '-tnp', '@MTeam', '@MPAD', '@tnp'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'OurBits',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-OurTV', '-PbK', '-MGs', '-Ao', '-OurBits', '-FLTTH', '-iLoveHD', '-iLoveTV', '-OuePad', '@OurTV', '@PbK', '@MGs', '@Ao', '@OurBits', '@FLTTH', '@iLoveHD', '@iLoveTV', '@OuePad'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'PTerClub',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-PTer', '-PTerWEB', '-PTerMV', '-PTerTV', '@PTer', '@PTerWEB', '@PTerMV', '@PTerTV'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'SSD',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-CMCT', '-CMCTV', '@CMCT', '@CMCTV'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'TTG',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-TTG', '-Wiki', '-NGB', '-DoA', '@TTG', '@Wiki', '@NGB', '@DoA'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'TJUPT',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-TJUPT', '@TJUPT'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'PTSBAO',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-OPS', '-FFansBD', '-FFansWEB', '-FFansTV', '-FFansDVD', '-FHDMv', '@OPS', '@FFansBD', '@FFansWEB', '@FFansTV', '@FFansDVD', '@FHDMv'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'Hares',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-Hares', '-HaresWEB', '-HaresTV', '@Hares', '@HaresWEB', '@HaresTV'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HDChina',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDCTV', '-HDChina', '@HDCTV', '@HDChina'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HDHome',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HDH', '-HDHome', '-HDHWEB', '-HDHTV', '-HDHPad', '@HDH', '@HDHome', '@HDHWEB', '@HDHTV', '@HDHPad'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'PTHOME',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-PTH', '-PTHome', '-PTHweb', '-PTHtv', '-PTHeBook', '-PTHAudio', '-PTHmusic', '@PTH', '@PTHome', '@PTHweb', '@PTHtv', '@PTHeBook', '@PTHAudio', '@PTHmusic'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'BTSCHOOL',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-BtsHD', '-BtsTV', '-BtsPAD', '-Zone', '@BtsHD', '@BtsTV', '@BtsPAD', '@Zone'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'KeepFRDS',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-FRDS', '@FRDS'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'BeiTai',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-BeiTai', '@BeiTai'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HD4FANS（beAst）',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-beAst', '@beAst', '-beAstTV', '@beAstTV'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'TLFbits',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-TLF', '@TLF'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'piggo',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-PiGoNF', '@PiGoNF', '-PigoHD', '@PigoHD', '-PigoWeb', '@PigoWeb'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'HHanClub',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-HHWEB', '@HHWEB'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'GainBound',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-DGB', '@DGB', '-GBWEB', '@GBWEB'],
+        userNameHTMLSelector: 'h1 > span',
+		seedListSelector: '#ka1', // 做种列表区域选择器
+		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
+		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
+		seedSizeSelector: 'td:nth-child(4)',
+		seedersNumberSelector: 'td:nth-child(5)',
+		seedUploadSizeSelector: 'td:nth-child(7)',
+		seedDownloadSizeSelector: 'td:nth-child(8)',
+		seedTimeSelector: 'td:nth-child(10)',
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
+        theLastPageFlagText: '下一页',
+		seedSize: 0,
+        seedItemsNumber: 0,
+		seedersNumber: 0,
+		seedUploadSize: 0,
+		seedDownloadSize: 0,
+		seedTime: 0,
+	},
+    {
+		siteName: 'PuTao',
+		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
+		spiderModel: 'NexusPHP', // 此参数暂未使用
+		siteGroups: ['-PuTao', '@PuTao'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -65,6 +795,7 @@ var siteData = [
 		siteUrl: '',
 		spiderModel: 'NexusPHP',
 		siteGroups: ['-Others'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -73,9 +804,9 @@ var siteData = [
 		seedUploadSizeSelector: 'td:nth-child(7)',
 		seedDownloadSizeSelector: 'td:nth-child(8)',
 		seedTimeSelector: 'td:nth-child(10)',
-		hasPagination: false,
-		nextPageButtonSelector: '',
-		theLastPageFlagSelector: '', // true for the end of pages
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
         theLastPageFlagText: '下一页',
 		seedSize: 0,
         seedItemsNumber: 0,
@@ -86,8 +817,26 @@ var siteData = [
 	},
 ];
 
+// 输出 siteData 中支持的站点和小组，用于调试
+function printSiteData() {
+    var siteDataString = '';
+    for (var i = 0; i < siteData.length; i++) {
+        // 如果 siteURL 为空或为 google.com，则为未正式适配
+        if (siteData[i].siteUrl == '' || siteData[i].siteUrl == 'google.com') {
+            siteDataString += '- ' + siteData[i].siteName + '（未正式适配）：' + siteData[i].siteGroups + '\n';
+        // 正式适配的站点
+        } else {
+            siteDataString += '- ' + siteData[i].siteName + '：' + siteData[i].siteGroups + '\n';
+        }
+    }
+    siteDataString = siteDataString.replace(/,/g, ', ');
+    console.log(siteDataString);
+}
+
+
 var siteName = '';
 var siteIndex = -1;
+var userNameHTML = '<span>未获取到用户名</span>';
 var userID = '';
 var seedList = undefined;
 var seedListHash = []; // 已经爬取过的做种列表的哈希值数组
@@ -122,6 +871,8 @@ function init() {
     if (result) {
         userID = result[1];
     }
+    // 获取用户名
+    userNameHTML = document.querySelector(siteData[siteIndex].userNameHTMLSelector).innerHTML;
     console.log('userID:', userID);
 }
 
@@ -190,12 +941,12 @@ function sizeToBytes(size) {
 }
 
 // 字节数转换为可读的字符串
-function bytesToSize(bytes) {
+function bytesToSize(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
     let k = 1024;
     let sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'BiB', 'NiB', 'DiB', 'CiB'];
     let i = Math.floor(Math.log(bytes) / Math.log(k));
-    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+    return (bytes / Math.pow(k, i)).toFixed(decimals) + ' ' + sizes[i];
 }
 
 // D:HH:MM:SS 或 HH:MM:SS 或 MM:SS 或 SS 转为秒数
@@ -244,7 +995,8 @@ function spider() {
         let finded = false;
         for (let i = 0; i < siteData.length; i++) {
             for (let j = 0; j < siteData[i].siteGroups.length; j++) {
-                if (title.indexOf(siteData[i].siteGroups[j]) !== -1) {
+                // 不区分大小写
+                if (title.toLowerCase().indexOf(siteData[i].siteGroups[j].toLowerCase()) !== -1) {
                     siteData[i].seedSize += sizeToBytes(size);
                     siteData[i].seedersNumber += seeders;
                     siteData[i].seedUploadSize += sizeToBytes(uploadSize);
@@ -278,8 +1030,11 @@ function spider() {
 
 // 输出数据到表格
 function outputData() {
-    // 将站点名称和用户的 UID 输出到 result 中
-    showResult('站点名称：' + siteData[siteIndex].siteName + '<br>');
+    // 将站点名称、用户名称和用户的 UID 输出到 result 中
+    // 使用谷歌 icon 缓存获取站点 icon 地址
+    let siteIcon = 'https://www.google.com/s2/favicons?domain=' + window.location.hostname;
+    showResult('站点名称：<img width="16px" src="' + siteIcon + '">&nbsp;' + siteData[siteIndex].siteName + '<br>');
+    appendResult('用户名称：' + userNameHTML + '<br>');
     appendResult('用户 ID/UID：' + userID + '<br>');
     // 将 siteData 中所有站点的 做种数量 和 做种体积 输出到 result 中
     let totalSeedItemsNumber = 0;
@@ -289,23 +1044,37 @@ function outputData() {
         totalSeedSize += siteData[i].seedSize;
     }
     appendResult('做种总量：' + totalSeedItemsNumber + '<br>');
-    appendResult('做种总大小：' + bytesToSize(totalSeedSize) + '<br>');
+    appendResult('做种总大小：' + bytesToSize(totalSeedSize, 3) + '<br>');
 
     // 输出数据到表格（优先输出当前站点，然后依次输出其他站点）
-    // 在同一行输出站点名称、做种数量、做种体积、平均做种人数、做种上传总量、做种下载总量、平均做种时间
+    // 在同一行输出站点名称、做种数量、做种体积、平均做种人数、做种上传总量、做种下载总量、平均做种时间，并将其原始值写入 data-value 属性中
     let table = document.createElement('table');
     table.innerHTML = '<tr><th>站点名称</th><th>做种数量</th><th>做种体积</th><th>平均做种人数</th><th>做种上传总量</th><th>做种下载总量</th><th>平均做种时间</th></tr>';
-    // 输出当前站点（仅当 seedItemsNumber 不为 0 时）
+    // 输出当前站点的数据（仅当 seedItemsNumber 不为 0 时）
     if (siteData[siteIndex].seedItemsNumber !== 0) {
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + siteData[siteIndex].siteName + '</td><td>' + siteData[siteIndex].seedItemsNumber + '</td><td>' + bytesToSize(siteData[siteIndex].seedSize) + '</td><td>' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2) + '</td><td>' + bytesToSize(siteData[siteIndex].seedUploadSize) + '</td><td>' + bytesToSize(siteData[siteIndex].seedDownloadSize) + '</td><td>' + secondsToTime(siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber) + '</td>';
+        tr.innerHTML = '<td data-value="' + siteData[siteIndex].siteName +'">' + siteData[siteIndex].siteName 
+        + '</td><td data-value="' + siteData[siteIndex].seedItemsNumber + '">' + siteData[siteIndex].seedItemsNumber 
+        + '</td><td data-value="' + siteData[siteIndex].seedSize + '">' + bytesToSize(siteData[siteIndex].seedSize, 3) 
+        + '</td><td data-value="' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2) + '">' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2)
+        + '</td><td data-value="' + siteData[siteIndex].seedUploadSize + '">' + bytesToSize(siteData[siteIndex].seedUploadSize, 2) 
+        + '</td><td data-value="' + siteData[siteIndex].seedDownloadSize + '">' + bytesToSize(siteData[siteIndex].seedDownloadSize, 2) 
+        + '</td><td data-value="' + (siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber).toFixed(2) + '">' + secondsToTime((siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber)) 
+        + '</td>';
         table.appendChild(tr);
     }
-    // 输出其他站点（仅当 seedItemsNumber 不为 0 时）
+    // 输出其他站点的数据（仅当 seedItemsNumber 不为 0 时）
     for (let i = 0; i < siteData.length; i++) {
         if (i !== siteIndex && siteData[i].seedItemsNumber !== 0) {
             let tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + siteData[i].siteName + '</td><td>' + siteData[i].seedItemsNumber + '</td><td>' + bytesToSize(siteData[i].seedSize) + '</td><td>' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2) + '</td><td>' + bytesToSize(siteData[i].seedUploadSize) + '</td><td>' + bytesToSize(siteData[i].seedDownloadSize) + '</td><td>' + secondsToTime(siteData[i].seedTime / siteData[i].seedItemsNumber) + '</td>';
+            tr.innerHTML = '<td data-value="' + siteData[i].siteName +'">' + siteData[i].siteName 
+            + '</td><td data-value="' + siteData[i].seedItemsNumber + '">' + siteData[i].seedItemsNumber 
+            + '</td><td data-value="' + siteData[i].seedSize + '">' + bytesToSize(siteData[i].seedSize, 3) 
+            + '</td><td data-value="' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2) + '">' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2)
+            + '</td><td data-value="' + siteData[i].seedUploadSize + '">' + bytesToSize(siteData[i].seedUploadSize, 2) 
+            + '</td><td data-value="' + siteData[i].seedDownloadSize + '">' + bytesToSize(siteData[i].seedDownloadSize, 2) 
+            + '</td><td data-value="' + (siteData[i].seedTime / siteData[i].seedItemsNumber).toFixed(2) + '">' + secondsToTime((siteData[i].seedTime / siteData[i].seedItemsNumber)) 
+            + '</td>';
             table.appendChild(tr);
         }
     }
@@ -313,6 +1082,94 @@ function outputData() {
     appendResult(table.outerHTML);
     notice.style.backgroundColor = 'rgba(31,177,65,1)';
     notice.style.color = 'white';
+    // #ss-container 的最小宽度设置为其当前值，防止变形
+    ssContainer.style.minWidth = ssContainer.offsetWidth + 'px';
+	// 表格排序功能
+    // 鼠标悬停显示手型
+    let tableHead = document.querySelectorAll('#ss-container table tr th');
+    for (let i = 0; i < tableHead.length; i++) {
+        tableHead[i].addEventListener('mouseover', function() {
+            this.style.cursor = 'pointer';
+        });
+    }
+    // 获取表格元素
+    let tableElement = document.querySelector('#ss-container table');
+    // 当 #ss-container 中的表格表头项被点击时，使用 sortTable 函数进行排序
+    for(let i = 0; i < tableHead.length; i++) {
+        tableHead[i].addEventListener('click', function() {
+            sortTable(tableElement, i);
+        });
+    }
+}
+
+// sortTable 函数，根据对应列 col 对 table 进行排序
+function sortTable(table, col) {
+    // 清除所有其他列后的 ' ▲' ' ▼'
+    let tableHead = document.querySelectorAll('#ss-container table tr th');
+    for (let i = 0; i < tableHead.length; i++) {
+        if (i !== col) {
+            tableHead[i].innerHTML = tableHead[i].innerHTML.replace(' ▲', '').replace(' ▼', '');
+        }
+    }
+	// 如果列后面有 ' ▲'，则将其改为 ' ▼'，并将 table 进行降序排序
+	if (tableHead[col].innerHTML.indexOf(' ▲') !== -1) {
+		tableHead[col].innerHTML = tableHead[col].innerHTML.replace(' ▲', ' ▼');
+		sortTableDesc(table, col);
+	}
+	// 如果列后面有 ' ▼'，则将其改为 ' ▲'，并将 table 进行升序排序
+	else if (tableHead[col].innerHTML.indexOf(' ▼') !== -1) {
+		tableHead[col].innerHTML = tableHead[col].innerHTML.replace(' ▼', ' ▲');
+		sortTableAsc(table, col);
+	}
+	// 如果列后面没有 ' ▲' ' ▼'，则将其改为 ' ▲'，并将 table 进行升序排序
+	else {
+		tableHead[col].innerHTML = tableHead[col].innerHTML + ' ▲';
+		sortTableAsc(table, col);
+	}
+}
+
+// sortTableAsc 函数，根据对应列 col 对 table 进行升序排序
+function sortTableAsc(table, col) {
+	let rows = table.rows;
+	let arr = [];
+	for (let i = 1; i < rows.length; i++) {
+		arr.push(rows[i]);
+	}
+	arr.sort(function(a, b) {
+		let aVal = a.cells[col].getAttribute('data-value');
+		let bVal = b.cells[col].getAttribute('data-value');
+		if (isNaN(aVal) || isNaN(bVal)) {
+			return aVal.localeCompare(bVal);
+		}
+		else {
+			return aVal - bVal;
+		}
+	});
+	for (let i = 0; i < arr.length; i++) {
+		table.appendChild(arr[i]);
+	}
+}
+
+// sortTableDesc 函数，根据对应列 col 对 table 进行降序排序
+function sortTableDesc(table, col) {
+	let rows = table.rows;
+	let arr = [];
+	for (let i = 1; i < rows.length; i++) {
+		arr.push(rows[i]);
+	}
+	arr.sort(function(a, b) {
+		let aVal = a.cells[col].getAttribute('data-value');
+		let bVal = b.cells[col].getAttribute('data-value');
+		if (isNaN(aVal) || isNaN(bVal)) {
+			return bVal.localeCompare(aVal);
+		}
+		else {
+			return bVal - aVal;
+		}
+	});
+	for (let i = 0; i < arr.length; i++) {
+		table.appendChild(arr[i]);
+	}
 }
 
 /* UI 相关 */
@@ -356,11 +1213,11 @@ function injectUI() {
         color: rgba(0, 0, 0, 0.76);
         box-sizing: border-box;
         min-width: 20vw;
-        max-width: 60vw;
+        max-width: 80vw;
         width: auto;
         height: auto;
         min-height: 15vh;
-        max-height: 80vh;
+        max-height: 90vh;
         background-color: rgba(255, 255, 255, 0.96);
         position: fixed;
         left: 0;
@@ -481,6 +1338,8 @@ function bindUIActions() {
 
 (function() {
 	'use strict';
+    // 调试
+    // printSiteData();
 
     // 初始化
     init();
