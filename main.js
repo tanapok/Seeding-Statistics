@@ -817,6 +817,23 @@ var siteData = [
 	},
 ];
 
+// 输出 siteData 中支持的站点和小组，用于调试
+function printSiteData() {
+    var siteDataString = '';
+    for (var i = 0; i < siteData.length; i++) {
+        // 如果 siteURL 为空或为 google.com，则为未正式适配
+        if (siteData[i].siteUrl == '' || siteData[i].siteUrl == 'google.com') {
+            siteDataString += siteData[i].siteName + '（未正式适配）：' + siteData[i].siteGroups + '\n';
+        // 正式适配的站点
+        } else {
+            siteDataString += siteData[i].siteName + '：' + siteData[i].siteGroups + '\n';
+        }
+    }
+    siteDataString = siteDataString.replace(/,/g, ', ');
+    console.log(siteDataString);
+}
+
+
 var siteName = '';
 var siteIndex = -1;
 var userNameHTML = '<span>未获取到用户名</span>';
@@ -1219,6 +1236,8 @@ function bindUIActions() {
 
 (function() {
 	'use strict';
+    // 调试
+    // printSiteData();
 
     // 初始化
     init();
