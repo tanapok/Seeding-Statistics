@@ -1068,8 +1068,8 @@ function outputData() {
     appendResult(table.outerHTML);
     notice.style.backgroundColor = 'rgba(31,177,65,1)';
     notice.style.color = 'white';
-    // #ss-container 的宽度设置为其当前值，防止变形
-    document.getElementById('ss-container').style.width = document.getElementById('ss-container').offsetWidth + 'px';
+    // #ss-container 的最小宽度设置为其当前值，防止变形
+    ssContainer.style.minWidth = ssContainer.offsetWidth + 'px';
 }
 
 /* UI 相关 */
