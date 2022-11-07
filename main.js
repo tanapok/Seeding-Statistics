@@ -1068,6 +1068,8 @@ function outputData() {
     appendResult(table.outerHTML);
     notice.style.backgroundColor = 'rgba(31,177,65,1)';
     notice.style.color = 'white';
+    // #ss-container 的宽度设置为其当前值，防止变形
+    document.getElementById('ss-container').style.width = document.getElementById('ss-container').offsetWidth + 'px';
 }
 
 /* UI 相关 */
@@ -1111,11 +1113,11 @@ function injectUI() {
         color: rgba(0, 0, 0, 0.76);
         box-sizing: border-box;
         min-width: 20vw;
-        max-width: 60vw;
+        max-width: 80vw;
         width: auto;
         height: auto;
         min-height: 15vh;
-        max-height: 80vh;
+        max-height: 90vh;
         background-color: rgba(255, 255, 255, 0.96);
         position: fixed;
         left: 0;
