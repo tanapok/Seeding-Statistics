@@ -1047,20 +1047,34 @@ function outputData() {
     appendResult('做种总大小：' + bytesToSize(totalSeedSize, 3) + '<br>');
 
     // 输出数据到表格（优先输出当前站点，然后依次输出其他站点）
-    // 在同一行输出站点名称、做种数量、做种体积、平均做种人数、做种上传总量、做种下载总量、平均做种时间
+    // 在同一行输出站点名称、做种数量、做种体积、平均做种人数、做种上传总量、做种下载总量、平均做种时间，并将其原始值写入 data-value 属性中
     let table = document.createElement('table');
     table.innerHTML = '<tr><th>站点名称</th><th>做种数量</th><th>做种体积</th><th>平均做种人数</th><th>做种上传总量</th><th>做种下载总量</th><th>平均做种时间</th></tr>';
     // 输出当前站点的数据（仅当 seedItemsNumber 不为 0 时）
     if (siteData[siteIndex].seedItemsNumber !== 0) {
         let tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + siteData[siteIndex].siteName + '</td><td>' + siteData[siteIndex].seedItemsNumber + '</td><td>' + bytesToSize(siteData[siteIndex].seedSize) + '</td><td>' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2) + '</td><td>' + bytesToSize(siteData[siteIndex].seedUploadSize) + '</td><td>' + bytesToSize(siteData[siteIndex].seedDownloadSize) + '</td><td>' + secondsToTime(siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber) + '</td>';
+        tr.innerHTML = '<td data-value="' + siteData[siteIndex].siteName +'">' + siteData[siteIndex].siteName 
+        + '</td><td data-value="' + siteData[siteIndex].seedItemsNumber + '">' + siteData[siteIndex].seedItemsNumber 
+        + '</td><td data-value="' + siteData[siteIndex].seedSize + '">' + bytesToSize(siteData[siteIndex].seedSize, 3) 
+        + '</td><td data-value="' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2) + '">' + (siteData[siteIndex].seedersNumber / siteData[siteIndex].seedItemsNumber).toFixed(2)
+        + '</td><td data-value="' + siteData[siteIndex].seedUploadSize + '">' + bytesToSize(siteData[siteIndex].seedUploadSize, 2) 
+        + '</td><td data-value="' + siteData[siteIndex].seedDownloadSize + '">' + bytesToSize(siteData[siteIndex].seedDownloadSize, 2) 
+        + '</td><td data-value="' + (siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber).toFixed(2) + '">' + secondsToTime((siteData[siteIndex].seedTime / siteData[siteIndex].seedItemsNumber)) 
+        + '</td>';
         table.appendChild(tr);
     }
     // 输出其他站点的数据（仅当 seedItemsNumber 不为 0 时）
     for (let i = 0; i < siteData.length; i++) {
         if (i !== siteIndex && siteData[i].seedItemsNumber !== 0) {
             let tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + siteData[i].siteName + '</td><td>' + siteData[i].seedItemsNumber + '</td><td>' + bytesToSize(siteData[i].seedSize) + '</td><td>' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2) + '</td><td>' + bytesToSize(siteData[i].seedUploadSize) + '</td><td>' + bytesToSize(siteData[i].seedDownloadSize) + '</td><td>' + secondsToTime(siteData[i].seedTime / siteData[i].seedItemsNumber) + '</td>';
+            tr.innerHTML = '<td data-value="' + siteData[i].siteName +'">' + siteData[i].siteName 
+            + '</td><td data-value="' + siteData[i].seedItemsNumber + '">' + siteData[i].seedItemsNumber 
+            + '</td><td data-value="' + siteData[i].seedSize + '">' + bytesToSize(siteData[i].seedSize, 3) 
+            + '</td><td data-value="' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2) + '">' + (siteData[i].seedersNumber / siteData[i].seedItemsNumber).toFixed(2)
+            + '</td><td data-value="' + siteData[i].seedUploadSize + '">' + bytesToSize(siteData[i].seedUploadSize, 2) 
+            + '</td><td data-value="' + siteData[i].seedDownloadSize + '">' + bytesToSize(siteData[i].seedDownloadSize, 2) 
+            + '</td><td data-value="' + (siteData[i].seedTime / siteData[i].seedItemsNumber).toFixed(2) + '">' + secondsToTime((siteData[i].seedTime / siteData[i].seedItemsNumber)) 
+            + '</td>';
             table.appendChild(tr);
         }
     }
