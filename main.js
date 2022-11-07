@@ -17,6 +17,7 @@ var siteData = [
 		siteUrl: 'wintersakura.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-SakuraWEB', '-SakuraSUB', '-WS', '-WScode', '-Sakura Academic'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -41,6 +42,7 @@ var siteData = [
 		siteUrl: 'carpt.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-CarPT'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -65,6 +67,7 @@ var siteData = [
 		siteUrl: 'hdvideo.one',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HDVWEB', '-HDVMV', '@HDVWEB', '@HDVMV'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -89,6 +92,7 @@ var siteData = [
 		siteUrl: 'ultrahd.net',
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-UltraTV', '-UltraHD', '@UltraTV', '@UltraHD'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -113,6 +117,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-QHstudIo', '@QHstudIo'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -137,6 +142,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-Audies', '@Audies', '-ADE', '@ADE', '@ADWeb', '-ADWeb', '-ADAudio', '-ADEBook', '-ADMusic', '@ADAudio', '@ADEBook', '@ADMusic'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -161,6 +167,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-CHDBits', '-CHDTV', '-CHDPAD', '-CHDWEB', '-CHDHKTV', '-StBOX', '-OneHD', '@CHDBits', '@CHDTV', '@CHDPAD', '@CHDWEB', '@CHDHKTV', '@StBOX', '@OneHD'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -185,6 +192,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-Dream', '-DBTV', '-HDo', '@Dream', '@DBTV', '@HDo'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -209,6 +217,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HDFans', '@HDFans'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -233,6 +242,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HDSky', '-HDSWEB', '-HDSTV', '-HDSPad', '-HDS', '@HDSky', '@HDSWEB', '@HDSTV', '@HDSPad', '@HDS'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -257,6 +267,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-LHD', '-LeagueHD', '-LeagueNF', '-LeagueTV', '-LeagueCD', '-LeagueWEB', '-i18n', '-CiNT', '@LHD', '@LeagueHD', '@LeagueNF', '@LeagueTV', '@LeagueCD', '@LeagueWEB', '@i18n', '@CiNT'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -281,6 +292,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-MTeam', '-MPAD', '-tnp', '@MTeam', '@MPAD', '@tnp'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -305,6 +317,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-OurTV', '-PbK', '-MGs', '-Ao', '-OurBits', '-FLTTH', '-iLoveHD', '-iLoveTV', '-OuePad', '@OurTV', '@PbK', '@MGs', '@Ao', '@OurBits', '@FLTTH', '@iLoveHD', '@iLoveTV', '@OuePad'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -329,6 +342,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-PTer', '-PTerWEB', '-PTerMV', '-PTerTV', '@PTer', '@PTerWEB', '@PTerMV', '@PTerTV'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -353,6 +367,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-CMCT', '-CMCTV', '@CMCT', '@CMCTV'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -377,6 +392,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-TTG', '-Wiki', '-NGB', '-DoA', '@TTG', '@Wiki', '@NGB', '@DoA'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -401,6 +417,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-TJUPT', '@TJUPT'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -425,6 +442,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-OPS', '-FFansBD', '-FFansWEB', '-FFansTV', '-FFansDVD', '-FHDMv', '@OPS', '@FFansBD', '@FFansWEB', '@FFansTV', '@FFansDVD', '@FHDMv'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -449,6 +467,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-Hares', '-HaresWEB', '-HaresTV', '@Hares', '@HaresWEB', '@HaresTV'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -473,6 +492,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HDCTV', '-HDChina', '@HDCTV', '@HDChina'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -497,6 +517,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HDH', '-HDHome', '-HDHWEB', '-HDHTV', '-HDHPad', '@HDH', '@HDHome', '@HDHWEB', '@HDHTV', '@HDHPad'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -521,6 +542,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-PTH', '-PTHome', '-PTHweb', '-PTHtv', '-PTHeBook', '-PTHAudio', '-PTHmusic', '@PTH', '@PTHome', '@PTHweb', '@PTHtv', '@PTHeBook', '@PTHAudio', '@PTHmusic'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -545,6 +567,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-BtsHD', '-BtsTV', '-BtsPAD', '-Zone', '@BtsHD', '@BtsTV', '@BtsPAD', '@Zone'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -569,6 +592,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-FRDS', '@FRDS'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -593,6 +617,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-BeiTai', '@BeiTai'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -617,6 +642,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-beAst', '@beAst', '-beAstTV', '@beAstTV'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -641,6 +667,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-TLF', '@TLF'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -665,6 +692,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-PiGoNF', '@PiGoNF', '-PigoHD', '@PigoHD', '-PigoWeb', '@PigoWeb'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -689,6 +717,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-HHWEB', '@HHWEB'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -713,6 +742,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-DGB', '@DGB', '-GBWEB', '@GBWEB'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -737,6 +767,7 @@ var siteData = [
 		siteUrl: 'google.com', // 仅支持该站点的小组，并未对该站点做适配
 		spiderModel: 'NexusPHP', // 此参数暂未使用
 		siteGroups: ['-PuTao', '@PuTao'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -761,6 +792,7 @@ var siteData = [
 		siteUrl: '',
 		spiderModel: 'NexusPHP',
 		siteGroups: ['-Others'],
+        userNameHTMLSelector: 'h1 > span',
 		seedListSelector: '#ka1', // 做种列表区域选择器
 		seedItemsSelector: 'table > tbody:first-child > tr:not(:first-child)', // 做种列表条目选择器
 		seedTitleSelector: 'td:nth-child(2) > a:nth-child(1)',
@@ -784,6 +816,7 @@ var siteData = [
 
 var siteName = '';
 var siteIndex = -1;
+var userNameHTML = '<span>未获取到用户名</span>';
 var userID = '';
 var seedList = undefined;
 var seedListHash = []; // 已经爬取过的做种列表的哈希值数组
@@ -818,6 +851,8 @@ function init() {
     if (result) {
         userID = result[1];
     }
+    // 获取用户名
+    userNameHTML = document.querySelector(siteData[siteIndex].userNameHTMLSelector).innerHTML;
     console.log('userID:', userID);
 }
 
@@ -975,8 +1010,11 @@ function spider() {
 
 // 输出数据到表格
 function outputData() {
-    // 将站点名称和用户的 UID 输出到 result 中
-    showResult('站点名称：' + siteData[siteIndex].siteName + '<br>');
+    // 将站点名称、用户名称和用户的 UID 输出到 result 中
+    // 使用谷歌 icon 缓存获取站点 icon 地址
+    let siteIcon = 'https://www.google.com/s2/favicons?domain=' + window.location.hostname;
+    showResult('站点名称：<img width="16px" src="' + siteIcon + '">&nbsp;' + siteData[siteIndex].siteName + '<br>');
+    appendResult('用户名称：' + userNameHTML + '<br>');
     appendResult('用户 ID/UID：' + userID + '<br>');
     // 将 siteData 中所有站点的 做种数量 和 做种体积 输出到 result 中
     let totalSeedItemsNumber = 0;
