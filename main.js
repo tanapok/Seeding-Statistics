@@ -6,6 +6,8 @@
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
 // @match        https://carpt.net/userdetails.php?id=*
+// @match        https://hdvideo.one/userdetails.php?id=*
+// @match        https://ultrahd.net/userdetails.php?id=*
 // @icon         https://download.wintersakura.net/uploads/2022/11/07/6369232f7705e.png
 // @grant        none
 // @license      GNU GPLv3
