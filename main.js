@@ -8,6 +8,7 @@
 // @match        https://carpt.net/userdetails.php?id=*
 // @match        https://hdvideo.one/userdetails.php?id=*
 // @match        https://ultrahd.net/userdetails.php?id=*
+// @match        *://*/userdetails.php?id=*
 // @icon         https://download.wintersakura.net/uploads/2022/11/07/6369232f7705e.png
 // @grant        none
 // @license      GNU GPLv3
@@ -803,9 +804,9 @@ var siteData = [
 		seedUploadSizeSelector: 'td:nth-child(7)',
 		seedDownloadSizeSelector: 'td:nth-child(8)',
 		seedTimeSelector: 'td:nth-child(10)',
-		hasPagination: false,
-		nextPageButtonSelector: '',
-		theLastPageFlagSelector: '', // true for the end of pages
+		hasPagination: true,
+		nextPageButtonSelector: 'p.nexus-pagination:nth-child(3) > a:nth-child(2) > b:nth-child(1)',
+		theLastPageFlagSelector: 'font.gray:nth-child(2) > b:nth-child(1)', // true for the end of pages
         theLastPageFlagText: '下一页',
 		seedSize: 0,
         seedItemsNumber: 0,
