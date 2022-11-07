@@ -9,7 +9,7 @@
 // @match        https://hdvideo.one/userdetails.php?id=*
 // @match        https://ultrahd.net/userdetails.php?id=*
 // @match        *://*/userdetails.php?id=*
-// @icon         https://download.wintersakura.net/uploads/2022/11/07/6369232f7705e.png
+// @icon         https://download.wintersakura.net/uploads/2022/11/08/63693c03f0e2a.png
 // @grant        none
 // @license      GNU GPLv3
 // ==/UserScript==
