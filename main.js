@@ -244,7 +244,8 @@ function spider() {
         let finded = false;
         for (let i = 0; i < siteData.length; i++) {
             for (let j = 0; j < siteData[i].siteGroups.length; j++) {
-                if (title.indexOf(siteData[i].siteGroups[j]) !== -1) {
+                // 不区分大小写
+                if (title.toLowerCase().indexOf(siteData[i].siteGroups[j].toLowerCase()) !== -1) {
                     siteData[i].seedSize += sizeToBytes(size);
                     siteData[i].seedersNumber += seeders;
                     siteData[i].seedUploadSize += sizeToBytes(uploadSize);
