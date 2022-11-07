@@ -6,7 +6,7 @@
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
 // @match        https://carpt.net/userdetails.php?id=*
-// @icon         https://download.wintersakura.net/uploads/2022/10/23/63551a96a6ddd.png
+// @icon         https://download.wintersakura.net/uploads/2022/11/07/6369232f7705e.png
 // @grant        none
 // @license      GNU GPLv3
 // ==/UserScript==
