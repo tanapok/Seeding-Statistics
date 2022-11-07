@@ -941,12 +941,12 @@ function sizeToBytes(size) {
 }
 
 // 字节数转换为可读的字符串
-function bytesToSize(bytes) {
+function bytesToSize(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
     let k = 1024;
     let sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'BiB', 'NiB', 'DiB', 'CiB'];
     let i = Math.floor(Math.log(bytes) / Math.log(k));
-    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+    return (bytes / Math.pow(k, i)).toFixed(decimals) + ' ' + sizes[i];
 }
 
 // D:HH:MM:SS 或 HH:MM:SS 或 MM:SS 或 SS 转为秒数
@@ -1044,7 +1044,7 @@ function outputData() {
         totalSeedSize += siteData[i].seedSize;
     }
     appendResult('做种总量：' + totalSeedItemsNumber + '<br>');
-    appendResult('做种总大小：' + bytesToSize(totalSeedSize) + '<br>');
+    appendResult('做种总大小：' + bytesToSize(totalSeedSize, 3) + '<br>');
 
     // 输出数据到表格（优先输出当前站点，然后依次输出其他站点）
     // 在同一行输出站点名称、做种数量、做种体积、平均做种人数、做种上传总量、做种下载总量、平均做种时间
