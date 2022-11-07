@@ -6,10 +6,41 @@
 
 ![用户界面截图](https://user-images.githubusercontent.com/25226381/197413483-3ee84565-852d-477e-906b-a0c393851571.png "用户界面截图")
 
-### 支持的站点
+### 支持的站点和小组
 
-- WinterSakura
-- CarPT
+括号中注明未正式适配的，意味着仅仅对这
+
+- WinterSakura：-SakuraWEB, -SakuraSUB, -WS, -WScode, -Sakura Academic
+- CarPT：-CarPT
+- HDVideo：-HDVWEB, -HDVMV, @HDVWEB, @HDVMV
+- UltraHD：-UltraTV, -UltraHD, @UltraTV, @UltraHD
+- QHstudIo（未正式适配）：-QHstudIo, @QHstudIo
+- Audiences（未正式适配）：-Audies, @Audies, -ADE, @ADE, @ADWeb, -ADWeb, -ADAudio, -ADEBook, -ADMusic, @ADAudio, @ADEBook, @ADMusic
+- CHDBits（未正式适配）：-CHDBits, -CHDTV, -CHDPAD, -CHDWEB, -CHDHKTV, -StBOX, -OneHD, @CHDBits, @CHDTV, @CHDPAD, @CHDWEB, @CHDHKTV, @StBOX, @OneHD
+- HD Dolby（未正式适配）：-Dream, -DBTV, -HDo, @Dream, @DBTV, @HDo
+- HDFans（未正式适配）：-HDFans, @HDFans
+- HDSky（未正式适配）：-HDSky, -HDSWEB, -HDSTV, -HDSPad, -HDS, @HDSky, @HDSWEB, @HDSTV, @HDSPad, @HDS
+- LemonHD（未正式适配）：-LHD, -LeagueHD, -LeagueNF, -LeagueTV, -LeagueCD, -LeagueWEB, -i18n, -CiNT, @LHD, @LeagueHD, @LeagueNF, @LeagueTV, @LeagueCD, @LeagueWEB, @i18n, @CiNT
+- M-Team（未正式适配）：-MTeam, -MPAD, -tnp, @MTeam, @MPAD, @tnp
+- OurBits（未正式适配）：-OurTV, -PbK, -MGs, -Ao, -OurBits, -FLTTH, -iLoveHD, -iLoveTV, -OuePad, @OurTV, @PbK, @MGs, @Ao, @OurBits, @FLTTH, @iLoveHD, @iLoveTV, @OuePad
+- PTerClub（未正式适配）：-PTer, -PTerWEB, -PTerMV, -PTerTV, @PTer, @PTerWEB, @PTerMV, @PTerTV
+- SSD（未正式适配）：-CMCT, -CMCTV, @CMCT, @CMCTV
+- TTG（未正式适配）：-TTG, -Wiki, -NGB, -DoA, @TTG, @Wiki, @NGB, @DoA
+- TJUPT（未正式适配）：-TJUPT, @TJUPT
+- PTSBAO（未正式适配）：-OPS, -FFansBD, -FFansWEB, -FFansTV, -FFansDVD, -FHDMv, @OPS, @FFansBD, @FFansWEB, @FFansTV, @FFansDVD, @FHDMv
+- Hares（未正式适配）：-Hares, -HaresWEB, -HaresTV, @Hares, @HaresWEB, @HaresTV
+- HDChina（未正式适配）：-HDCTV, -HDChina, @HDCTV, @HDChina
+- HDHome（未正式适配）：-HDH, -HDHome, -HDHWEB, -HDHTV, -HDHPad, @HDH, @HDHome, @HDHWEB, @HDHTV, @HDHPad
+- PTHOME（未正式适配）：-PTH, -PTHome, -PTHweb, -PTHtv, -PTHeBook, -PTHAudio, -PTHmusic, @PTH, @PTHome, @PTHweb, @PTHtv, @PTHeBook, @PTHAudio, @PTHmusic
+- BTSCHOOL（未正式适配）：-BtsHD, -BtsTV, -BtsPAD, -Zone, @BtsHD, @BtsTV, @BtsPAD, @Zone
+- KeepFRDS（未正式适配）：-FRDS, @FRDS
+- BeiTai（未正式适配）：-BeiTai, @BeiTai
+- HD4FANS（beAst）（未正式适配）：-beAst, @beAst, -beAstTV, @beAstTV
+- TLFbits（未正式适配）：-TLF, @TLF
+- piggo（未正式适配）：-PiGoNF, @PiGoNF, -PigoHD, @PigoHD, -PigoWeb, @PigoWeb
+- HHanClub（未正式适配）：-HHWEB, @HHWEB
+- GainBound（未正式适配）：-DGB, @DGB, -GBWEB, @GBWEB
+- PuTao（未正式适配）：-PuTao, @PuTao
 
 ### 安装方法（推荐）
 
