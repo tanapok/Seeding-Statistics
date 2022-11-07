@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         保种统计
 // @namespace    https://github.com/tanapok/Seeding-Statistics
-// @version      1.0.4
+// @version      1.1.0
 // @description  Try this little tool and figure out the seed data!
 // @author       tanapok
 // @match        https://wintersakura.net/userdetails.php?id=*
